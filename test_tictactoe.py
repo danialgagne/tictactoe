@@ -19,6 +19,7 @@ def test_player_even_empties_returns_o():
 
     assert player(board) == 'O'
 
+
 def test_action_no_action_on_full_board():
     board = [["X", "X", "X"],
             ["X", "X", "X"],
@@ -26,12 +27,14 @@ def test_action_no_action_on_full_board():
     
     assert not actions(board)
 
+
 def test_action_if_empty_cell():
     board = [["X", "X", EMPTY],
             ["X", "X", "X"],
             ["X", EMPTY, "X"]]
     act = actions(board)
     assert (0,2) in act and (2,1) in act
+
 
 def test_result_success():
     board = [["X", "X", EMPTY],
@@ -44,6 +47,7 @@ def test_result_success():
 
     assert result(board, action) == resulting_board
 
+
 def test_result_exception():
     board = [["X", "X", EMPTY],
             ["X", "X", "X"],
@@ -51,3 +55,24 @@ def test_result_exception():
     action = (0, 1)
     with pytest.raises(IndexError):
         result(board, action)
+
+
+def test_winner_row():
+    board = [[EMPTY, EMPTY, EMPTY],
+            ['X', 'X', 'X'],
+            [EMPTY, EMPTY, EMPTY]]
+    assert winner(board) == 'X'
+
+
+def test_winner_column():
+    board = [[EMPTY, EMPTY, 'O'],
+            [EMPTY, EMPTY, 'O'],
+            [EMPTY, EMPTY, 'O']]
+    assert winner(board) == 'O'
+
+
+def test_winner_diagonal():
+    board = [['X', EMPTY, EMPTY],
+            [EMPTY, 'X', EMPTY],
+            [EMPTY, EMPTY, 'X']]
+    assert winner(board) == 'X'
