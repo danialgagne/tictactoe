@@ -71,8 +71,57 @@ def test_winner_column():
     assert winner(board) == 'O'
 
 
-def test_winner_diagonal():
+def test_winner_first_diagonal():
     board = [['X', EMPTY, EMPTY],
             [EMPTY, 'X', EMPTY],
             [EMPTY, EMPTY, 'X']]
     assert winner(board) == 'X'
+
+
+def test_winner_second_diagonal():
+    board = [[EMPTY, EMPTY, 'X'],
+            [EMPTY, 'X', EMPTY],
+            ['X', EMPTY, EMPTY]]
+    assert winner(board) == 'X'
+
+
+def test_terminal_with_winner():
+    board = [['X', EMPTY, EMPTY],
+            [EMPTY, 'X', EMPTY],
+            [EMPTY, EMPTY, 'X']]
+    assert terminal(board)
+
+
+def test_terminal_on_full_board():
+    board = [["X", "O", "X"],
+            ["O", "X", "O"],
+            ["O", "X", "O"]]
+    assert terminal(board)
+
+
+def test_not_terminal_if_empty_spaces():
+    board = [["X", "O", "X"],
+            ["O", "X", "O"],
+            ["O", "X", EMPTY]]
+    assert not terminal(board)
+
+
+def test_utility_X_winner():
+    board = [['X', EMPTY, EMPTY],
+            [EMPTY, 'X', EMPTY],
+            [EMPTY, EMPTY, 'X']]
+    assert utility(board) == 1
+
+
+def test_utility_O_winner():
+    board = [['O', EMPTY, EMPTY],
+            [EMPTY, 'O', EMPTY],
+            [EMPTY, EMPTY, 'O']]
+    assert utility(board) == -1
+
+
+def test_utility_no_winner():
+    board = [['X', EMPTY, EMPTY],
+            [EMPTY, EMPTY, EMPTY],
+            [EMPTY, EMPTY, 'X']]
+    assert utility(board) == 0
