@@ -99,6 +99,7 @@ def terminal(board):
     """
     Returns True if game is over, False otherwise.
     """
+    # check for a winner or no moves left
     return any([winner(board), not actions(board)])
 
 
@@ -106,6 +107,7 @@ def utility(board):
     """
     Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
     """
+    # use values dict for mapping
     win_value = {'X': 1, 'O': -1, None: 0}
     return win_value[winner(board)]
 
@@ -114,4 +116,39 @@ def minimax(board):
     """
     Returns the optimal action for the current player on the board.
     """
-    raise NotImplementedError
+    best_move = None
+    if player(board) == X:
+        print('next move')
+        current_max = -2
+        for action in actions(board):
+            v = min_value(result(board, action))
+            if v > current_max:
+                current_max = v
+                best_move = action
+            print(f'action: {action}, cur max: {current_max}, best: {best_move} v: {v}')
+    if player(board) == O:
+        current_min = 2
+        for action in actions(board):
+            v = max_value(result(board, action))
+            if v < current_min:
+                current_min = v
+                best_move = action
+    return best_move
+            
+
+def max_value(board):
+    v = -2
+    if terminal(board):
+        return utility(board)
+    for action in actions(board):
+        v = max(v, min_value(result(board, action)))
+    return v
+
+
+def min_value(board):
+    v = 2
+    if terminal(board):
+        return utility(board)
+    for action in actions(board):
+        v = min(v, max_value(result(board, action)))
+    return v

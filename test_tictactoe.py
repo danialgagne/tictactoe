@@ -125,3 +125,43 @@ def test_utility_no_winner():
             [EMPTY, EMPTY, EMPTY],
             [EMPTY, EMPTY, 'X']]
     assert utility(board) == 0
+
+
+def test_minimax_O_chooses_right_move():
+    board = [[EMPTY, "X", "O"],
+            ["O", "X", "X"],
+            ["X", EMPTY, "O"]]
+    correct_move = (2, 1)
+    assert minimax(board) == correct_move
+
+
+def test_minimax_X_chooses_right_move():
+    board = [["X", "O", "O"],
+            ["O", "X", EMPTY],
+            ["X", EMPTY, EMPTY]]
+    correct_move = (2, 2)
+    assert minimax(board) == correct_move
+
+
+def test_minimax_no_moves_returns_none():
+    board = [["X", "X", "O"],
+            ["O", "X", "X"],
+            ["X", "O", "O"]]
+    correct_move = None
+    assert minimax(board) == correct_move
+
+
+def test_minimax_O_chooses_right_move_v2():
+    board = [["X", EMPTY, "O"],
+            [EMPTY, "X", EMPTY],
+            [EMPTY, EMPTY, EMPTY]]
+    correct_move = (2, 2)
+    assert minimax(board) == correct_move
+
+
+def test_minimax_X_chooses_right_move_v2():
+    board = [[EMPTY, "X", "O"],
+            [EMPTY, "O", "X"],
+            [EMPTY, EMPTY, EMPTY]]
+    correct_move = (2, 0)
+    assert minimax(board) == correct_move
