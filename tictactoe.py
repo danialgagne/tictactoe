@@ -118,14 +118,12 @@ def minimax(board):
     """
     best_move = None
     if player(board) == X:
-        print('next move')
         current_max = -2
         for action in actions(board):
             v = min_value(result(board, action))
             if v > current_max:
                 current_max = v
                 best_move = action
-            print(f'action: {action}, cur max: {current_max}, best: {best_move} v: {v}')
     if player(board) == O:
         current_min = 2
         for action in actions(board):
